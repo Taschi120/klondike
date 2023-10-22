@@ -15,9 +15,10 @@ func create_and_shuffle():
 			card.value = value
 			card.open = false
 			card.at_top = false
-			card.location = Constants.Location.DRAW
+			card.region = Constants.Regions.DRAW
 			
 			card.clicked.connect(main_scene._on_card_clicked)
+			card.double_clicked.connect(main_scene._on_double_click)
 			unshuffled_pile.append(card)
 			
 	var shuffled_pile = []
@@ -58,10 +59,21 @@ func add_to_discard(card) -> void:
 		
 	# add the new card
 	card.open = true
-	card.location = Constants.Location.DISCARD
+	card.at_top = true
+	card.region = Constants.Regions.DISCARD
 	$Discard.add_child(card)
-	card.location = Vector2.ZERO
+	card.position = Vector2.ZERO
 
+func remove_top_from_discard() -> void:
+	var child_count = $Discard.get_child_count()
+	assert(child_count >= 2)
+	$Discard.remove_child($Discard.get_child(child_count - 1))
+	
+	child_count = $Discard.get_child_count()
+	if child_count >= 2:
+		var top_card = $Discard.get_child(child_count - 1)
+		top_card.at_top = true
+		
 
 func _on_empty_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
@@ -77,8 +89,9 @@ func _on_empty_input_event(viewport: Node, event: InputEvent, shape_idx: int) ->
 				$Discard.remove_child(card)
 				card.open = false
 				card.at_top = false
-				card.location = Constants.Location.DRAW
+				card.region = Constants.Regions.DRAW
 				$Stock.add_child(card)
 			
 			if $Stock.get_child_count() >= 2:
 				$Stock.get_child($Stock.get_child_count() - 1).at_top = true
+

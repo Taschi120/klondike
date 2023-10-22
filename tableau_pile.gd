@@ -6,8 +6,10 @@ func add_card(card):
 	
 func get_top_card():
 	var child_count = get_child_count()
-	assert(child_count > 1)
-	return get_child(child_count - 1)
+	if child_count >= 2:
+		return get_child(child_count - 1)
+	else:
+		return null
 	
 func remove_top_card():
 	var card = get_top_card()

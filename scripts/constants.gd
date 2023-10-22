@@ -1,3 +1,3 @@
 class_name Constants
 
-enum Location { DRAW, DISCARD, TABLEAU, FOUNDATION, CURSOR }
+enum Regions { DRAW, DISCARD, TABLEAU, FOUNDATION, CURSOR }
