@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://bsg17suqanq1g"]
+
+[ext_resource type="Script" path="res://foundation.gd" id="1_arv2m"]
+[ext_resource type="Texture2D" uid="uid://d2tu030blrwjo" path="res://assets/empty_stack.png" id="1_bdsfn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rx1up"]
+size = Vector2(96, 144)
+
+[node name="Foundation" type="Area2D"]
+script = ExtResource("1_arv2m")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_bdsfn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_rx1up")
