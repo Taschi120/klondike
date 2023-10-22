@@ -101,10 +101,21 @@ func debug_string() -> String:
 		+ " @ " + get_region_name() + ")"
 	return result
 
+func clickable():
+	match region:
+		Constants.Regions.DRAW:
+			return at_top
+		Constants.Regions.DISCARD:
+			return at_top
+		Constants.Regions.FOUNDATION:
+			return false
+		Constants.Regions.TABLEAU:
+			return open or at_top
+	return false
 
 func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	# this'll need to be changed for picking up stacks
-	if not at_top:
+	if not clickable():
 		return
 		
 	if event is InputEventMouseButton and event.double_click and event.button_index == MOUSE_BUTTON_LEFT:

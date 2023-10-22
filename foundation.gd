@@ -8,3 +8,4 @@ func get_current_value() -> int:
 func add_card(_card) -> void:
 	add_child(_card)
 	_card.at_top = false
+	_card.position = Vector2.ZERO

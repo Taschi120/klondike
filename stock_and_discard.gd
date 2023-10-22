@@ -58,9 +58,9 @@ func add_to_discard(card) -> void:
 		$Discard.get_child(child_count - 1).at_top = false
 		
 	# add the new card
-	card.open = true
-	card.at_top = true
-	card.region = Constants.Regions.DISCARD
+	card.set_deferred("open", true)
+	card.set_deferred("at_top", true)
+	card.set_deferred("region", Constants.Regions.DISCARD)
 	$Discard.add_child(card)
 	card.position = Vector2.ZERO
 
@@ -72,7 +72,7 @@ func remove_top_from_discard() -> void:
 	child_count = $Discard.get_child_count()
 	if child_count >= 2:
 		var top_card = $Discard.get_child(child_count - 1)
-		top_card.at_top = true
+		top_card.set_deferred("at_top", true)
 		
 
 func _on_empty_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:

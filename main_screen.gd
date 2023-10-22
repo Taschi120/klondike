@@ -62,7 +62,8 @@ func _on_double_click(_card) -> void:
 				return
 
 func try_move_to_foundation(_card) -> bool:
-	print("try_move_to_foundation")
+	if not _card.open:
+		return false
 	for foundation in $Foundations.get_children():
 		if foundation.suit == _card.suit:
 			if foundation.get_current_value() + 1 == _card.value:
@@ -79,6 +80,8 @@ func try_move_to_foundation(_card) -> bool:
 	return false
 	
 func try_move_to_tableau(_card) -> bool:
+	if not _card.open:
+		return false
 	for tableau in $Tableaux.get_children():
 		var top_card = tableau.get_top_card()
 		if top_card == null && _card.value == 13:
@@ -116,6 +119,7 @@ func remove_card_from_tableaux(_card):
 	for tableau in tableaux:
 		if _card in tableau.get_children():
 			tableau.remove_child(_card)
+			tableau.reorg_stack()
 
 				
 func find_tableau(_card):
