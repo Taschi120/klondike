@@ -46,7 +46,7 @@ func draw_and_remove():
 	if (idx <= 0):
 		pass # TODO handle empty clickspot here
 	else:
-		cards[idx].at_top = true
+		cards[idx].set_deferred("at_top", true)
 	
 	return card
 
@@ -71,8 +71,6 @@ func _on_empty_input_event(viewport: Node, event: InputEvent, shape_idx: int) ->
 			return
 		else:
 			print("Empty stock clicked - cycling")
-			
-			var cards = []
 			
 			while $Discard.get_child_count() >= 2:
 				var card = $Discard.get_child($Discard.get_child_count() - 1)

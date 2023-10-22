@@ -48,8 +48,10 @@ func get_row(_suit: String) -> int:
 		return 1
 	if _suit == CLUB:
 		return 2
-	else:
-		return 4
+	elif _suit == SPADE:
+		return 3
+	assert(false)
+	return 5
 
 func debug_string() -> String:
 	var result = ""
