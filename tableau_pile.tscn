@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://dpglfqfyqon3h"]
+[gd_scene load_steps=3 format=3 uid="uid://dpglfqfyqon3h"]
 
 [ext_resource type="Script" path="res://tableau_pile.gd" id="1_ctfaj"]
 [ext_resource type="Texture2D" uid="uid://d2tu030blrwjo" path="res://assets/empty_stack.png" id="1_f0x82"]
-[ext_resource type="PackedScene" uid="uid://cboesb5h8kiyo" path="res://card_stack.tscn" id="3_14j5q"]
 
 [node name="TableauPile" type="Node2D"]
 script = ExtResource("1_ctfaj")
@@ -10,4 +9,4 @@ script = ExtResource("1_ctfaj")
 [node name="Empty" type="Sprite2D" parent="."]
 texture = ExtResource("1_f0x82")
 
-[node name="CardStack" parent="." instance=ExtResource("3_14j5q")]
+[node name="Internal" type="Node2D" parent="."]

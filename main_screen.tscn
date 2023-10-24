@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://id2b76fvowpk"]
+[gd_scene load_steps=7 format=3 uid="uid://id2b76fvowpk"]
 
 [ext_resource type="Texture2D" uid="uid://bxf4eh6onh515" path="res://assetpacks/cards/Backgrounds/background_3.png" id="1_85u7u"]
 [ext_resource type="Script" path="res://main_screen.gd" id="1_ckoej"]
-[ext_resource type="PackedScene" uid="uid://2s752fnut7r0" path="res://stock_and_discard.tscn" id="4_h2qnu"]
+[ext_resource type="PackedScene" uid="uid://clgvempy2u13u" path="res://stock.tscn" id="3_muh34"]
+[ext_resource type="PackedScene" uid="uid://cidlck5ee3un6" path="res://discard.tscn" id="4_nk5yw"]
 [ext_resource type="PackedScene" uid="uid://dpglfqfyqon3h" path="res://tableau_pile.tscn" id="4_pp1ba"]
 [ext_resource type="PackedScene" uid="uid://bsg17suqanq1g" path="res://foundation.tscn" id="5_w2yvf"]
 
@@ -15,9 +16,12 @@ position = Vector2(640, 360)
 rotation = 1.5708
 texture = ExtResource("1_85u7u")
 
-[node name="StockAndDiscard" parent="." node_paths=PackedStringArray("main_scene") instance=ExtResource("4_h2qnu")]
-position = Vector2(79, 100)
+[node name="Stock" parent="." node_paths=PackedStringArray("main_scene") instance=ExtResource("3_muh34")]
+position = Vector2(72, 96)
 main_scene = NodePath("..")
+
+[node name="Discard" parent="." instance=ExtResource("4_nk5yw")]
+position = Vector2(190, 96)
 
 [node name="Foundations" type="Node2D" parent="."]
 position = Vector2(112, 0)
@@ -59,3 +63,5 @@ position = Vector2(848, 336)
 
 [node name="TableauPile7" parent="Tableaux" instance=ExtResource("4_pp1ba")]
 position = Vector2(968, 336)
+
+[connection signal="needs_cycling" from="Stock" to="." method="cycle_discard"]

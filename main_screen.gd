@@ -1,4 +1,6 @@
-extends Node2D
+extends CardStack
+
+class_name Discard
 
 @onready var tableaux = [
 	$Tableaux/TableauPile1,
@@ -13,20 +15,20 @@ extends Node2D
 var selected_card = null
 
 func _ready() -> void:
-	$StockAndDiscard.create_and_shuffle()
+	$Stock.create_and_shuffle()
 	
 	# put cards on tableau
 	for tableau_num in range(7):
 		var stack = tableaux[tableau_num]
 		# deal n face-down cards
 		for card_num in range(tableau_num):
-			var card = $StockAndDiscard.draw_and_remove()
-			stack.get_node("CardStack").add_card(card)
+			var card = $Stock.take_top_card()
+			stack.add_card(card)
 		# and deal one face-open card
-		var card = $StockAndDiscard.draw_and_remove()
+		var card = $Stock.take_top_card()
 		card.open = true
 		card.at_top = true
-		stack.get_node("CardStack").add_card(card)
+		stack.add_card(card)
 
 func _on_card_clicked(_card) -> void:
 	print(_card.debug_string())
@@ -34,8 +36,8 @@ func _on_card_clicked(_card) -> void:
 	
 	match _card.get_region():
 		Regions.DRAW:
-			var card = $StockAndDiscard.draw_and_remove()
-			$StockAndDiscard.add_to_discard(card)
+			var card = $Stock.take_top_card()
+			$Discard.add_card(card)
 			
 		Regions.DISCARD:
 			selected_card = _card
@@ -64,8 +66,10 @@ func try_move_to_foundation(_card) -> bool:
 		if foundation.suit == _card.suit:
 			if foundation.get_current_value() + 1 == _card.value:
 				if _card.get_region() == Regions.DISCARD:
-					$StockAndDiscard.remove_top_from_discard()
+					print("Move from discard to foundation")
+					$Discard.take_top_card()
 				elif _card.get_region() == Regions.TABLEAU:
+					print("Move from tableau to foundation")
 					remove_card_from_tableaux(_card)
 				else:
 					assert(false)
@@ -77,7 +81,10 @@ func try_move_to_tableau(_card) -> bool:
 	if not _card.open:
 		return false
 	for tableau in $Tableaux.get_children():
-		var top_card = tableau.get_top_card()
+		
+		if tableau.is_empty():
+			continue
+		var top_card = tableau.peek()
 		if top_card == null && _card.value == 13:
 			# move king to empty slot
 			if _card.get_region() == Regions.DISCARD:
@@ -96,7 +103,7 @@ func try_move_to_tableau(_card) -> bool:
 			_card.get_color() != top_card.get_color():
 				top_card.at_top = false
 				if _card.get_region() == Regions.DISCARD:
-					$StockAndDiscard.remove_top_from_discard()
+					$Discard.take_top_card()
 				elif _card.get_region() == Regions.TABLEAU:
 					remove_card_from_tableaux(_card)
 				else:
@@ -110,8 +117,8 @@ func try_move_to_tableau(_card) -> bool:
 	
 func remove_card_from_tableaux(_card):
 	for tableau in tableaux:
-		if _card in tableau.get_children():
-			tableau.remove_top_card()
+		if not tableau.is_empty() and _card == tableau.peek():
+			tableau.take_top_card()
 
 func find_tableau(_card):
 	assert(_card.get_region() == Regions.TABLEAU)
@@ -121,3 +128,14 @@ func find_tableau(_card):
 			
 	assert(false)
 	return null
+
+func cycle_discard():
+	while not $Discard.is_empty():
+		var card = $Discard.take_top_card()
+		card.set_deferred("open", false)
+		card.set_deferred("at_top", false)
+		$Stock.add_card(card)
+			
+		if not $Stock.is_empty():
+			$Stock.peek().set_deferred("at_top", true)
+			

@@ -17,7 +17,7 @@ var suit = SPADE: set = set_suit
 var value = 1: set = set_value
 
 func get_region() -> int:
-	return get_parent().type
+	return get_parent().get_parent().get_region()
 
 func set_open(_open: bool) -> void:
 	open = _open

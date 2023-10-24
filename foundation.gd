@@ -1,7 +1,11 @@
-extends Area2D
+extends CardStack
+
+class_name Foundation
 
 @export var suit = "heart"
 
 func get_current_value() -> int:
-	return $CardStack.get_child_count()
+	return size()
 
+func get_region():
+	return Regions.FOUNDATION
