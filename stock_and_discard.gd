@@ -2,8 +2,6 @@ extends Node
 
 @export var main_scene: Node2D = null
 
-var Constants = preload("res://scripts/constants.gd")
-
 var card_scene = load("res://card.tscn")
 
 func create_and_shuffle():
@@ -15,7 +13,6 @@ func create_and_shuffle():
 			card.value = value
 			card.open = false
 			card.at_top = false
-			card.region = Constants.Regions.DRAW
 			
 			card.clicked.connect(main_scene._on_card_clicked)
 			card.double_clicked.connect(main_scene._on_double_click)
@@ -28,70 +25,49 @@ func create_and_shuffle():
 		var card = unshuffled_pile[pos]
 		unshuffled_pile.remove_at(pos)
 		
-		$Stock.add_child(card)
+		$Stock/CardStack.add_card(card)
 	
 func draw_and_remove():
-	var cards = $Stock.get_children()
-	var idx = cards.size() - 1
-	
-	# if idx is exactly zero, the only element in the stack is the "Empty" sprite!
-	assert(idx > 0)
-	
-	var card = cards[idx]
-	$Stock.remove_child(card)
-	card.at_top = false # should be re-set by whoever is taking the card
+
+	var _card = $Stock/CardStack.take_top_card()
+	_card.at_top = false # should be re-set by whoever is taking the card
 	
 	# make the new top card clickable
-	cards = $Stock.get_children()
-	idx = cards.size() - 1
-	if (idx <= 0):
-		pass # TODO handle empty clickspot here
-	else:
-		cards[idx].set_deferred("at_top", true)
+	if not $Stock/CardStack.is_empty():
+		_card = $Stock/CardStack.peek()
+		_card.set_deferred("at_top", true)
 	
-	return card
+	return _card
 
-func add_to_discard(card) -> void:
+func add_to_discard(_card) -> void:
 	# make the old top card unclickable
-	var child_count = $Discard.get_child_count()
-	if child_count >= 2:
-		$Discard.get_child(child_count - 1).at_top = false
+	if not $Discard/CardStack.is_empty():
+		$Discard/CardStack.peek().set_deferred("at_top", false)
 		
 	# add the new card
-	card.set_deferred("open", true)
-	card.set_deferred("at_top", true)
-	card.set_deferred("region", Constants.Regions.DISCARD)
-	$Discard.add_child(card)
-	card.position = Vector2.ZERO
+	_card.set_deferred("open", true)
+	_card.set_deferred("at_top", true)
+	$Discard/CardStack.add_card(_card)
+	_card.position = Vector2.ZERO
 
-func remove_top_from_discard() -> void:
-	var child_count = $Discard.get_child_count()
-	assert(child_count >= 2)
-	$Discard.remove_child($Discard.get_child(child_count - 1))
-	
-	child_count = $Discard.get_child_count()
-	if child_count >= 2:
-		var top_card = $Discard.get_child(child_count - 1)
-		top_card.set_deferred("at_top", true)
-		
+func remove_top_from_discard():
+	return $Discard/CardStack.take_top_card()
 
 func _on_empty_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 
-		if $Stock.get_child_count() > 1:
+		if $Stock/CardStack.is_empty():
 			print("Stock clicked - ignore, not empty")
 			return
 		else:
 			print("Empty stock clicked - cycling")
 			
-			while $Discard.get_child_count() >= 2:
-				var card = $Discard.get_child($Discard.get_child_count() - 1)
-				$Discard.remove_child(card)
-				card.open = false
-				card.at_top = false
-				card.region = Constants.Regions.DRAW
-				$Stock.add_child(card)
+			while not $Discard/CardStack.is_empty():
+				var card = $Discard/CardStack.take_top_card()
+				card.set_deferred("open", false)
+				card.set_deferred("at_top", false)
+				$Stock/CardStack.add_card(card)
 			
-			if $Stock.get_child_count() >= 2:
-				$Stock.get_child($Stock.get_child_count() - 1).at_top = true
+			if not $Stock/CardStack.is_empty():
+				$Stock/CardStack.peek().set_deferred("at_top", true)
 

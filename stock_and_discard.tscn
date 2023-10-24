@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://2s752fnut7r0"]
+[gd_scene load_steps=5 format=3 uid="uid://2s752fnut7r0"]
 
 [ext_resource type="Script" path="res://stock_and_discard.gd" id="1_obndo"]
 [ext_resource type="Texture2D" uid="uid://d2tu030blrwjo" path="res://assets/empty_stack.png" id="2_mqo38"]
+[ext_resource type="PackedScene" uid="uid://cboesb5h8kiyo" path="res://card_stack.tscn" id="3_bxehn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pxomi"]
 size = Vector2(92, 139)
@@ -20,10 +21,14 @@ texture = ExtResource("2_mqo38")
 position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_pxomi")
 
+[node name="CardStack" parent="Stock" instance=ExtResource("3_bxehn")]
+
 [node name="Discard" type="Node2D" parent="."]
 position = Vector2(120, 0)
 
 [node name="Empty" type="Sprite2D" parent="Discard"]
 texture = ExtResource("2_mqo38")
+
+[node name="CardStack" parent="Discard" instance=ExtResource("3_bxehn")]
 
 [connection signal="input_event" from="Stock/Empty" to="." method="_on_empty_input_event"]

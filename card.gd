@@ -1,7 +1,5 @@
 extends Node
 
-var Constants = preload("res://scripts/constants.gd")
-
 signal clicked
 signal double_clicked
 
@@ -15,12 +13,11 @@ const DIAMOND = "diamond"
 const SPADE = "spade"
 const CLUB = "club"
 
-
-
 var suit = SPADE: set = set_suit
 var value = 1: set = set_value
 
-var region = Constants.Regions.DRAW
+func get_region() -> int:
+	return get_parent().type
 
 func set_open(_open: bool) -> void:
 	open = _open
@@ -55,19 +52,19 @@ func get_row(_suit: String) -> int:
 	return 5
 	
 func get_region_name() -> String:
-	match region:
-		Constants.Regions.DRAW:
+	match get_region():
+		Regions.DRAW:
 			return "Draw Pile"
-		Constants.Regions.DISCARD:
+		Regions.DISCARD:
 			return "Discard Pile"
-		Constants.Regions.TABLEAU:
+		Regions.TABLEAU:
 			return "Tableau"
-		Constants.Regions.FOUNDATION:
+		Regions.FOUNDATION:
 			return "Foundation"
-		Constants.Regions.CURSOR:
+		Regions.CURSOR:
 			return "Cursor"
 			
-	return "Unknown (" + str(region) + ")"
+	return "Unknown (" + str(get_region()) + ")"
 
 func get_color() -> String:
 	if suit == "club" || suit == "spade":
@@ -102,14 +99,14 @@ func debug_string() -> String:
 	return result
 
 func clickable():
-	match region:
-		Constants.Regions.DRAW:
+	match get_region():
+		Regions.DRAW:
 			return at_top
-		Constants.Regions.DISCARD:
+		Regions.DISCARD:
 			return at_top
-		Constants.Regions.FOUNDATION:
+		Regions.FOUNDATION:
 			return false
-		Constants.Regions.TABLEAU:
+		Regions.TABLEAU:
 			return open or at_top
 	return false
 
