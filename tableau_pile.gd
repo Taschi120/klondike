@@ -1,8 +1,14 @@
 extends Node2D
 
 func add_card(card):
+	var top_card = 	get_top_card();
+	if top_card != null:
+		top_card.at_top = false
+		
+	card.set_deferred("at_top", true)
 	add_child(card)
 	reorg_stack()
+
 	
 func get_top_card():
 	var child_count = get_child_count()
@@ -14,6 +20,11 @@ func get_top_card():
 func remove_top_card():
 	var card = get_top_card()
 	remove_child(card)
+	
+	var top_card = get_top_card()
+	if top_card != null:
+		top_card.set_deferred("at_top", true)
+	
 	reorg_stack()
 	return card
 	

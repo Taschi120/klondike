@@ -118,10 +118,8 @@ func try_move_to_tableau(_card) -> bool:
 func remove_card_from_tableaux(_card):
 	for tableau in tableaux:
 		if _card in tableau.get_children():
-			tableau.remove_child(_card)
-			tableau.reorg_stack()
+			tableau.remove_top_card()
 
-				
 func find_tableau(_card):
 	assert(_card.region == Constants.Regions.TABLEAU)
 	for tableau in tableaux:
