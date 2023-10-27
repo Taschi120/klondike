@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://eycvb3tw45dg"]
+
+[ext_resource type="Script" path="res://scenes/dropoff_spot.gd" id="1_s4knv"]
+[ext_resource type="Texture2D" uid="uid://clru64b1fj7ip" path="res://assets/glowspot.png" id="2_nafny"]
+
+[node name="DropoffSpot" type="Node2D"]
+script = ExtResource("1_s4knv")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_nafny")

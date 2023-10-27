@@ -1,0 +1,71 @@
+[gd_scene load_steps=8 format=3 uid="uid://id2b76fvowpk"]
+
+[ext_resource type="Texture2D" uid="uid://bxf4eh6onh515" path="res://assetpacks/cards/Backgrounds/background_3.png" id="1_85u7u"]
+[ext_resource type="Script" path="res://scenes/main_screen.gd" id="1_ckoej"]
+[ext_resource type="PackedScene" uid="uid://clgvempy2u13u" path="res://scenes/stock.tscn" id="3_muh34"]
+[ext_resource type="PackedScene" uid="uid://cidlck5ee3un6" path="res://scenes/discard.tscn" id="4_nk5yw"]
+[ext_resource type="PackedScene" uid="uid://dpglfqfyqon3h" path="res://scenes/tableau_pile.tscn" id="4_pp1ba"]
+[ext_resource type="PackedScene" uid="uid://bsg17suqanq1g" path="res://scenes/foundation.tscn" id="5_w2yvf"]
+[ext_resource type="PackedScene" uid="uid://bpeebsj72rum3" path="res://scenes/selection.tscn" id="7_j4tme"]
+
+[node name="MainScreen" type="Node2D"]
+script = ExtResource("1_ckoej")
+metadata/_edit_horizontal_guides_ = [266.0]
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(640, 360)
+rotation = 1.5708
+texture = ExtResource("1_85u7u")
+
+[node name="Stock" parent="." node_paths=PackedStringArray("main_scene") instance=ExtResource("3_muh34")]
+position = Vector2(72, 96)
+main_scene = NodePath("..")
+
+[node name="Discard" parent="." instance=ExtResource("4_nk5yw")]
+position = Vector2(190, 96)
+
+[node name="Foundations" type="Node2D" parent="."]
+position = Vector2(112, 0)
+
+[node name="FoundationHeart" parent="Foundations" instance=ExtResource("5_w2yvf")]
+position = Vector2(496, 104)
+
+[node name="FoundationDiamond" parent="Foundations" instance=ExtResource("5_w2yvf")]
+position = Vector2(624, 104)
+suit = "diamond"
+
+[node name="FoundationSpade" parent="Foundations" instance=ExtResource("5_w2yvf")]
+position = Vector2(752, 104)
+suit = "spade"
+
+[node name="FoundationClub" parent="Foundations" instance=ExtResource("5_w2yvf")]
+position = Vector2(880, 104)
+suit = "club"
+
+[node name="Tableaux" type="Node2D" parent="."]
+
+[node name="TableauPile1" parent="Tableaux" instance=ExtResource("4_pp1ba")]
+position = Vector2(240, 336)
+
+[node name="TableauPile2" parent="Tableaux" instance=ExtResource("4_pp1ba")]
+position = Vector2(368, 336)
+
+[node name="TableauPile3" parent="Tableaux" instance=ExtResource("4_pp1ba")]
+position = Vector2(496, 336)
+
+[node name="TableauPile4" parent="Tableaux" instance=ExtResource("4_pp1ba")]
+position = Vector2(616, 336)
+
+[node name="TableauPile5" parent="Tableaux" instance=ExtResource("4_pp1ba")]
+position = Vector2(728, 336)
+
+[node name="TableauPile6" parent="Tableaux" instance=ExtResource("4_pp1ba")]
+position = Vector2(848, 336)
+
+[node name="TableauPile7" parent="Tableaux" instance=ExtResource("4_pp1ba")]
+position = Vector2(968, 336)
+
+[node name="Selection" parent="." instance=ExtResource("7_j4tme")]
+position = Vector2(344, 48)
+
+[connection signal="needs_cycling" from="Stock" to="." method="cycle_discard"]

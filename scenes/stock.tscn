@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://clgvempy2u13u"]
+
+[ext_resource type="Script" path="res://scenes/stock.gd" id="1_ge7xo"]
+[ext_resource type="Texture2D" uid="uid://d2tu030blrwjo" path="res://assets/empty_stack.png" id="2_ooxf8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sespj"]
+size = Vector2(92, 139)
+
+[node name="Stock" type="Node2D"]
+script = ExtResource("1_ge7xo")
+
+[node name="Empty" type="Area2D" parent="."]
+
+[node name="Sprite" type="Sprite2D" parent="Empty"]
+texture = ExtResource("2_ooxf8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Empty"]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_sespj")
+
+[node name="Internal" type="Node2D" parent="."]
+
+[connection signal="input_event" from="Empty" to="." method="_on_input_event"]
