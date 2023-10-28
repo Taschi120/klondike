@@ -46,7 +46,7 @@ func reorg_stack():
 	card.position = offset
 	var previous_card_open = card.open
 
-	for i in range(0, child_count):
+	for i in range(1, child_count):
 		if previous_card_open:
 			offset += FACEUP_OFFSET
 		else:

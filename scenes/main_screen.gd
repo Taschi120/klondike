@@ -98,7 +98,7 @@ func _on_right_click(_card) -> void:
 	# try to drop onto a drop target
 	var drop_target: CardStack = null
 	for stack in valid_drop_targets:
-		if stack.hovered:
+		if stack.hovered and stack.get_node("DropoffSpot").active:
 			drop_target = stack
 			
 	if drop_target:
