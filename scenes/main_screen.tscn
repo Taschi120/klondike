@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://id2b76fvowpk"]
+[gd_scene load_steps=9 format=3 uid="uid://id2b76fvowpk"]
 
 [ext_resource type="Texture2D" uid="uid://bxf4eh6onh515" path="res://assetpacks/cards/Backgrounds/background_3.png" id="1_85u7u"]
 [ext_resource type="Script" path="res://scenes/main_screen.gd" id="1_ckoej"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dpglfqfyqon3h" path="res://scenes/tableau_pile.tscn" id="4_pp1ba"]
 [ext_resource type="PackedScene" uid="uid://bsg17suqanq1g" path="res://scenes/foundation.tscn" id="5_w2yvf"]
 [ext_resource type="PackedScene" uid="uid://bpeebsj72rum3" path="res://scenes/selection.tscn" id="7_j4tme"]
+[ext_resource type="PackedScene" uid="uid://ckdykflyiefy8" path="res://ui.tscn" id="8_enu3o"]
 
 [node name="MainScreen" type="Node2D"]
 script = ExtResource("1_ckoej")
@@ -72,5 +73,8 @@ position = Vector2(968, 336)
 
 [node name="Selection" parent="." instance=ExtResource("7_j4tme")]
 position = Vector2(344, 48)
+
+[node name="UI" parent="." instance=ExtResource("8_enu3o")]
+visible = false
 
 [connection signal="needs_cycling" from="Stock" to="." method="cycle_discard"]
