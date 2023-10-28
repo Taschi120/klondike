@@ -2,9 +2,9 @@ extends Node
 
 class_name Card
 
-signal clicked
+signal picked_up
 signal double_clicked
-signal right_clicked
+signal released
 
 var open = false: set = set_open
 
@@ -77,6 +77,7 @@ func get_color() -> String:
 		
 func is_at_top():
 	var p = get_parent()
+	assert(p != null)
 	if p == null:
 		return false
 	var siblings = p.get_children()
@@ -125,14 +126,18 @@ func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if not clickable():
 		return
 		
+	var _parent = get_parent()
+	if _parent:
+		var dropoff_spot = _parent.get_node("DropoffSpot")
+		if dropoff_spot and dropoff_spot.active:
+			return
+		
 	if event is InputEventMouseButton and event.double_click and event.button_index == MOUSE_BUTTON_LEFT and clickable:
 		print("dc")
 		double_clicked.emit(self)
 		
-	if event is InputEventMouseButton and event.pressed:
-		if event.button_index == MOUSE_BUTTON_RIGHT:
-			print("RC")
-			right_clicked.emit(self)
-			print("RCd")
-		if event.button_index == MOUSE_BUTTON_LEFT and get_region() != Regions.CURSOR:
-			clicked.emit(self)
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+		if event.is_pressed():
+			picked_up.emit(self)
+		elif event.is_released():
+			released.emit(self)

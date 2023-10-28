@@ -4,6 +4,13 @@ class_name CardStack
 
 @export var type = Regions.DRAW
 
+var hovered = false
+
+func _ready() -> void:
+	if $DropoffSpot:
+		$DropoffSpot.mouse_entered.connect(func(): hovered = true)
+		$DropoffSpot.mouse_exited.connect(func(): hovered = false)
+
 func get_cards() -> Array:
 	return $Internal.get_children()
 	
@@ -43,9 +50,18 @@ func contains(_card) -> bool:
 	return $Internal.get_children().has(_card)
 	
 func _on_selection_changed(selection: Array, source: CardStack) -> void:
-	pass
+	if selection.is_empty():
+		$DropoffSpot.active = false
+	else:
+		$DropoffSpot.active = can_accept(selection, source)
 	
 func can_accept(cards: Array, source: CardStack) -> bool:
-	assert(false)
 	return false
 	
+
+
+func _on_dropoff_spot_mouse_entered() -> void:
+	hovered = true
+
+func _on_dropoff_spot_mouse_exited() -> void:
+	hovered = false

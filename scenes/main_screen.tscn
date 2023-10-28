@@ -29,23 +29,23 @@ position = Vector2(112, 0)
 
 [node name="FoundationHeart" parent="Foundations" instance=ExtResource("5_w2yvf")]
 position = Vector2(496, 104)
-suit = null
-type = null
+suit = "heart"
+type = 1
 
 [node name="FoundationDiamond" parent="Foundations" instance=ExtResource("5_w2yvf")]
 position = Vector2(624, 104)
 suit = "diamond"
-type = null
+type = 1
 
 [node name="FoundationSpade" parent="Foundations" instance=ExtResource("5_w2yvf")]
 position = Vector2(752, 104)
 suit = "spade"
-type = null
+type = 1
 
 [node name="FoundationClub" parent="Foundations" instance=ExtResource("5_w2yvf")]
 position = Vector2(880, 104)
 suit = "club"
-type = null
+type = 1
 
 [node name="Tableaux" type="Node2D" parent="."]
 

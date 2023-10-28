@@ -61,30 +61,27 @@ func _on_card_clicked(_card) -> void:
 			if not $Selection.is_empty():
 				$Selection.put_back()
 			$Selection.add_card_from(_card, $Discard)
+			notify_selection_change($Discard)
 			
 		Regions.TABLEAU:
-			if not $Selection.is_empty() and not $Selection.is_empty():
-				# TODO - Place stack at clickspot if possible!
+			if not $Selection.is_empty():
 				return
-			assert($Selection.is_empty())
+
 			if _card.open:
 				print("Pickup from tableau")
 				var _tableau = find_tableau(_card)
 				var _cards = _tableau.take_top_cards(_card)
 				assert(_cards.size() >= 1)
 				$Selection.add_cards_from(_cards, _tableau)
+				notify_selection_change(_tableau)
 			elif _card.at_top:
 				_card.open = true
 			
 
 func notify_selection_change(_source: CardStack) -> void:
-	var new_state = $Selection.is_empty()
-
 	for stack in valid_drop_targets:
 		stack._on_selection_changed($Selection.get_cards(), _source)
 		
-	
-
 func _on_double_click(_card) -> void:
 	print(_card.debug_string())
 	
@@ -96,9 +93,24 @@ func _on_double_click(_card) -> void:
 				return
 
 func _on_right_click(_card) -> void:
-	print("Dropping card(s)")
-	if not $Selection.is_empty():
-		$Selection.put_back()
+	if $Selection.is_empty():
+		return
+	# try to drop onto a drop target
+	var drop_target: CardStack = null
+	for stack in valid_drop_targets:
+		if stack.hovered:
+			drop_target = stack
+			
+	if drop_target:
+		var cards = $Selection.take_cards()
+		drop_target.add_cards(cards)
+		notify_selection_change(null)
+	else:
+		# We're not above a valid drop target - return cards to source
+		print("Dropping card(s)")
+		if not $Selection.is_empty():
+			$Selection.put_back()
+			notify_selection_change(null)
 
 func try_move_to_foundation(_card) -> bool:
 	if not _card.open:

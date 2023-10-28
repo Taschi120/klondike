@@ -18,9 +18,9 @@ func create_and_shuffle():
 			card.open = false
 			card.at_top = false
 			
-			card.clicked.connect(main_scene._on_card_clicked)
+			card.picked_up.connect(main_scene._on_card_clicked)
 			card.double_clicked.connect(main_scene._on_double_click)
-			card.right_clicked.connect(main_scene._on_right_click)
+			card.released.connect(main_scene._on_right_click)
 			unshuffled_pile.append(card)
 			
 	var shuffled_pile = []
