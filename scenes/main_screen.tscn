@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://id2b76fvowpk"]
+[gd_scene load_steps=11 format=3 uid="uid://id2b76fvowpk"]
 
 [ext_resource type="Texture2D" uid="uid://bxf4eh6onh515" path="res://assetpacks/cards/Backgrounds/background_3.png" id="1_85u7u"]
 [ext_resource type="Script" path="res://scenes/main_screen.gd" id="1_ckoej"]
@@ -8,6 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://bsg17suqanq1g" path="res://scenes/foundation.tscn" id="5_w2yvf"]
 [ext_resource type="PackedScene" uid="uid://bpeebsj72rum3" path="res://scenes/selection.tscn" id="7_j4tme"]
 [ext_resource type="PackedScene" uid="uid://ckdykflyiefy8" path="res://ui.tscn" id="8_enu3o"]
+[ext_resource type="PackedScene" uid="uid://diw0imd6aphmu" path="res://cheat_ui.tscn" id="9_n1di1"]
+[ext_resource type="AudioStream" uid="uid://c8wpouym8sbqx" path="res://assetpacks/kenney/jingles-saxophone_15.ogg" id="9_xtol0"]
 
 [node name="MainScreen" type="Node2D"]
 script = ExtResource("1_ckoej")
@@ -30,23 +32,18 @@ position = Vector2(112, 0)
 
 [node name="FoundationHeart" parent="Foundations" instance=ExtResource("5_w2yvf")]
 position = Vector2(496, 104)
-suit = "heart"
-type = 1
 
 [node name="FoundationDiamond" parent="Foundations" instance=ExtResource("5_w2yvf")]
 position = Vector2(624, 104)
 suit = "diamond"
-type = 1
 
 [node name="FoundationSpade" parent="Foundations" instance=ExtResource("5_w2yvf")]
 position = Vector2(752, 104)
 suit = "spade"
-type = 1
 
 [node name="FoundationClub" parent="Foundations" instance=ExtResource("5_w2yvf")]
 position = Vector2(880, 104)
 suit = "club"
-type = 1
 
 [node name="Tableaux" type="Node2D" parent="."]
 
@@ -76,5 +73,12 @@ position = Vector2(344, 48)
 
 [node name="UI" parent="." instance=ExtResource("8_enu3o")]
 visible = false
+
+[node name="CheatUI" parent="." instance=ExtResource("9_n1di1")]
+
+[node name="Audio" type="Node2D" parent="."]
+
+[node name="VictoryFanfare" type="AudioStreamPlayer2D" parent="Audio"]
+stream = ExtResource("9_xtol0")
 
 [connection signal="needs_cycling" from="Stock" to="." method="cycle_discard"]

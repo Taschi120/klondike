@@ -9,8 +9,6 @@ size = Vector2(96, 144)
 
 [node name="Foundation" type="Area2D"]
 script = ExtResource("1_khbhi")
-suit = null
-type = null
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_56xdb")

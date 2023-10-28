@@ -7,7 +7,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lv7le"]
 size = Vector2(100, 143)
 
-[node name="Card" type="Area2D"]
+[node name="Card" type="Area2D" groups=["cards"]]
 script = ExtResource("1_02imm")
 
 [node name="CardbackSprite" type="Sprite2D" parent="."]

@@ -30,6 +30,12 @@ class_name MainScreen
 func _ready() -> void:
 	$Stock.create_and_shuffle()
 	
+	if $CheatUI:
+		$CheatUI.win.connect(self.win)
+	
+	for foundation in $Foundations.get_children():
+		foundation.card_added.connect(self.check_victory)
+	
 	# put cards on tableau
 	for tableau_num in range(7):
 		var stack = tableaux[tableau_num]
@@ -197,3 +203,17 @@ func cycle_discard():
 		if not $Stock.is_empty():
 			$Stock.peek().set_deferred("at_top", true)
 			
+func check_victory():
+	for foundation in $Foundations.get_children():
+		if foundation.get_current_value() < 13:
+			return
+	win()
+
+		
+func win() -> void:
+	$Audio/VictoryFanfare.play()
+	for card in get_tree().get_nodes_in_group("cards"):
+		var tween = get_tree().create_tween()
+		tween.tween_property(card, "position", card.position + Vector2(0, 2000), 3)\
+		.set_trans(Tween.TRANS_CUBIC)
+		tween.tween_callback(card.queue_free)

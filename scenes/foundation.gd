@@ -4,6 +4,12 @@ class_name Foundation
 
 @export var suit = "heart"
 
+signal card_added
+
+func add_card(_card) -> void:
+	super.add_card(_card)
+	card_added.emit()
+
 func get_current_value() -> int:
 	return size()
 

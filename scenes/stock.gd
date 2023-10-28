@@ -8,7 +8,13 @@ signal needs_cycling
 
 var card_scene = load("res://scenes/card.tscn")
 
-func create_and_shuffle():
+func take_top_card() -> Card:
+	$Audio/DealCard.play()
+	return super.take_top_card()
+	
+
+func create_and_shuffle() -> void:
+	$Audio/Shuffle.play()
 	var unshuffled_pile = []
 	for suit in ["heart", "diamond", "spade", "club"]:
 		for value in range(1, 14):
