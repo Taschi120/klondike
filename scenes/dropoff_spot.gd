@@ -7,7 +7,7 @@ var active = false : set = set_active
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	$Sprite2D.modulate = COLOR_ON
+	$Sprite2D.modulate = COLOR_OFF
 
 func set_active(value: bool) -> void:
 	active = value

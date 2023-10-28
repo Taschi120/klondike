@@ -4,6 +4,9 @@ class_name CardStack
 
 @export var type = Regions.DRAW
 
+func get_cards() -> Array:
+	return $Internal.get_children()
+	
 func add_card(_card):
 	$Internal.add_child(_card)
 	_card.position = Vector2.ZERO
@@ -38,3 +41,11 @@ func get_region():
 
 func contains(_card) -> bool:
 	return $Internal.get_children().has(_card)
+	
+func _on_selection_changed(selection: Array, source: CardStack) -> void:
+	pass
+	
+func can_accept(cards: Array, source: CardStack) -> bool:
+	assert(false)
+	return false
+	

@@ -12,6 +12,21 @@ class_name MainScreen
 	$Tableaux/TableauPile7,
 ]
 
+@onready var valid_drop_targets = [
+	$Tableaux/TableauPile1,
+	$Tableaux/TableauPile2,
+	$Tableaux/TableauPile3,
+	$Tableaux/TableauPile4,
+	$Tableaux/TableauPile5,
+	$Tableaux/TableauPile6,
+	$Tableaux/TableauPile7,
+	$Foundations/FoundationHeart,
+	$Foundations/FoundationDiamond,
+	$Foundations/FoundationSpade,
+	$Foundations/FoundationClub,
+	$Discard
+]
+
 func _ready() -> void:
 	$Stock.create_and_shuffle()
 	
@@ -61,6 +76,14 @@ func _on_card_clicked(_card) -> void:
 			elif _card.at_top:
 				_card.open = true
 			
+
+func notify_selection_change(_source: CardStack) -> void:
+	var new_state = $Selection.is_empty()
+
+	for stack in valid_drop_targets:
+		stack._on_selection_changed($Selection.get_cards(), _source)
+		
+	
 
 func _on_double_click(_card) -> void:
 	print(_card.debug_string())

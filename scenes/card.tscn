@@ -16,6 +16,7 @@ texture = ExtResource("2_j7bih")
 
 [node name="MainSprite" type="Sprite2D" parent="."]
 texture = ExtResource("3_m70v7")
+offset = Vector2(-2, 0)
 hframes = 13
 vframes = 4
 

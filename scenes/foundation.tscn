@@ -2,13 +2,15 @@
 
 [ext_resource type="Script" path="res://scenes/foundation.gd" id="1_khbhi"]
 [ext_resource type="Texture2D" uid="uid://d2tu030blrwjo" path="res://assets/empty_stack.png" id="2_56xdb"]
-[ext_resource type="PackedScene" uid="uid://eycvb3tw45dg" path="res://dropoff_spot.tscn" id="3_1lq1l"]
+[ext_resource type="PackedScene" uid="uid://eycvb3tw45dg" path="res://scenes/dropoff_spot.tscn" id="3_1lq1l"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rx1up"]
 size = Vector2(96, 144)
 
 [node name="Foundation" type="Area2D"]
 script = ExtResource("1_khbhi")
+suit = null
+type = null
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_56xdb")

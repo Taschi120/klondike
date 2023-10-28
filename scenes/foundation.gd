@@ -9,3 +9,7 @@ func get_current_value() -> int:
 
 func get_region():
 	return Regions.FOUNDATION
+
+func _on_selection_changed(cards, source):
+	if cards.is_empty():
+		
