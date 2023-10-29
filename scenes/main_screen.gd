@@ -221,3 +221,8 @@ func win() -> void:
 	$Audio/VictoryFanfare.play()
 	$UI.congratulate()
 
+func _get_configuration_warnings() -> PackedStringArray:
+	var results = PackedStringArray()
+	if get_tree().get_nodes_in_group("cards").size() != 52:
+		results.append("Number of cards is not 52")
+	return results

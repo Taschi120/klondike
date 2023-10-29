@@ -20,7 +20,7 @@ func can_accept(cards: Array, source: CardStack) -> bool:
 	if cards.size() != 1:
 		return false
 		
-	if source.get_region() not in [Regions.DISCARD, Regions.FOUNDATION]:
+	if source.get_region() not in [Regions.DISCARD, Regions.TABLEAU]:
 		return false
 		
 	if suit != cards[0].suit:
