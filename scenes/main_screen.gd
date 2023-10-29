@@ -30,6 +30,11 @@ class_name MainScreen
 func _ready() -> void:
 	start_game()
 		
+
+func _process(delta: float) -> void:
+	var num_cards = get_tree().get_nodes_in_group("cards").size()
+	assert(num_cards == 52 || num_cards == 0)
+
 func start_game() -> void:
 	for card in get_tree().get_nodes_in_group("cards"):
 		card.queue_free()
@@ -65,6 +70,8 @@ func _on_card_clicked(_card) -> void:
 			if not $Selection.is_empty():
 				return
 			var card = $Stock.take_top_card()
+			assert(card == _card)
+			print("Moving " + card.debug_string() + " from Stock to Discard")
 			$Discard.add_card(card)
 			
 		Regions.DISCARD:
@@ -222,9 +229,3 @@ func check_victory():
 func win() -> void:
 	$Audio/VictoryFanfare.play()
 	$UI.congratulate()
-
-func _get_configuration_warnings() -> PackedStringArray:
-	var results = PackedStringArray()
-	if get_tree().get_nodes_in_group("cards").size() != 52:
-		results.append("Number of cards is not 52")
-	return results

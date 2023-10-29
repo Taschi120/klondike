@@ -20,6 +20,8 @@ var suit = SPADE: set = set_suit
 var value = 1: set = set_value
 
 func get_region() -> int:
+	if get_parent() == null or get_parent().get_parent() == null:
+		return -1
 	return get_parent().get_parent().get_region()
 
 func set_open(_open: bool) -> void:
@@ -66,6 +68,8 @@ func get_region_name() -> String:
 			return "Foundation"
 		Regions.CURSOR:
 			return "Cursor"
+		-1:
+			return "In Transit"
 			
 	return "Unknown (" + str(get_region()) + ")"
 

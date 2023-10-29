@@ -45,6 +45,7 @@ func take_cards() -> Array:
 func put_back() -> void:
 	assert($Internal.get_child_count() > 0)
 	assert(source != null)
+	print("Returning " + str(size()) + " to " + str(source))
 	# we need to "buffer" the source because take_cards() will null it
 	var _source = source
 	var cards = take_cards()
