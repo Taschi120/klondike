@@ -10,6 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_vfsbp")
 script = ExtResource("1_4p2nq")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
@@ -37,6 +38,7 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("1_vfsbp")
+theme_type_variation = &"HeaderLarge"
 text = "Settings"
 
 [node name="SFXToggle" type="CheckButton" parent="PanelContainer/MarginContainer/VBoxContainer"]

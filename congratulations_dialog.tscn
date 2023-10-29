@@ -38,6 +38,7 @@ layout_mode = 2
 [node name="Heading" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
+theme_type_variation = &"HeaderLarge"
 text = "Congratz!"
 
 [node name="Text" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]

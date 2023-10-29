@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dpglfqfyqon3h" path="res://scenes/game/tableau_pile.tscn" id="4_pp1ba"]
 [ext_resource type="PackedScene" uid="uid://bsg17suqanq1g" path="res://scenes/game/foundation.tscn" id="5_w2yvf"]
 [ext_resource type="PackedScene" uid="uid://bpeebsj72rum3" path="res://scenes/game/selection.tscn" id="7_j4tme"]
-[ext_resource type="PackedScene" uid="uid://b0820bm2kd3n3" path="res://scenes/ui/UI.tscn" id="8_v3q0t"]
+[ext_resource type="PackedScene" uid="uid://b0820bm2kd3n3" path="res://scenes/ui/ui.tscn" id="8_v3q0t"]
 [ext_resource type="PackedScene" uid="uid://diw0imd6aphmu" path="res://scenes/ui/cheat_ui.tscn" id="9_n1di1"]
 [ext_resource type="AudioStream" uid="uid://c8wpouym8sbqx" path="res://assetpacks/kenney/jingles-saxophone_15.ogg" id="9_xtol0"]
 

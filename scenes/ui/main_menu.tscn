@@ -40,6 +40,7 @@ theme = ExtResource("2_ycop7")
 
 [node name="Title" type="Label" parent="PanelContainer/MarginContainer/BoxContainer"]
 layout_mode = 2
+theme_type_variation = &"HeaderLarge"
 text = "Klondike Solitaire"
 label_settings = SubResource("LabelSettings_b4ffj")
 
