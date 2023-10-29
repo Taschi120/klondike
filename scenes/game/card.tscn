@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://bv6agjytpmsf5"]
+
+[ext_resource type="Script" path="res://scenes/game/card.gd" id="1_02imm"]
+[ext_resource type="Texture2D" uid="uid://bjbhu6yiuvwv5" path="res://assetpacks/cards/Standard 52 Cards/solitaire/individuals/card back/card_back.png" id="2_j7bih"]
+[ext_resource type="Texture2D" uid="uid://c8nl8hh7p1wo7" path="res://assetpacks/cards/Standard 52 Cards/solitaire/all_cards.png" id="3_m70v7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lv7le"]
+size = Vector2(100, 143)
+
+[node name="Card" type="Area2D" groups=["cards"]]
+script = ExtResource("1_02imm")
+
+[node name="CardbackSprite" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("2_j7bih")
+
+[node name="MainSprite" type="Sprite2D" parent="."]
+texture = ExtResource("3_m70v7")
+offset = Vector2(-2, 0)
+hframes = 13
+vframes = 4
+
+[node name="clickspot" type="CollisionShape2D" parent="."]
+position = Vector2(1, 2)
+shape = SubResource("RectangleShape2D_lv7le")
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]

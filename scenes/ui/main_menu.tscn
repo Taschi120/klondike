@@ -1,0 +1,80 @@
+[gd_scene load_steps=4 format=3 uid="uid://ckdykflyiefy8"]
+
+[ext_resource type="Script" path="res://scenes/ui/main_menu.gd" id="1_alxnd"]
+[ext_resource type="Theme" uid="uid://b6lbw18suvq5x" path="res://scenes/ui/ui_theme.tres" id="2_ycop7"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_b4ffj"]
+font_size = 30
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_alxnd")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -78.0
+offset_top = -77.0
+offset_right = 78.0
+offset_bottom = 77.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_ycop7")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+layout_mode = 2
+theme = ExtResource("2_ycop7")
+
+[node name="BoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("2_ycop7")
+
+[node name="Title" type="Label" parent="PanelContainer/MarginContainer/BoxContainer"]
+layout_mode = 2
+text = "Klondike Solitaire"
+label_settings = SubResource("LabelSettings_b4ffj")
+
+[node name="Return to Game" type="Button" parent="PanelContainer/MarginContainer/BoxContainer"]
+layout_mode = 2
+text = "Return to Game"
+
+[node name="StartButton" type="Button" parent="PanelContainer/MarginContainer/BoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_ycop7")
+text = "Deal New Game"
+
+[node name="Label2" type="Label" parent="PanelContainer/MarginContainer/BoxContainer"]
+layout_mode = 2
+
+[node name="SettingsButton" type="Button" parent="PanelContainer/MarginContainer/BoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_ycop7")
+text = "Settings"
+
+[node name="AboutButton" type="Button" parent="PanelContainer/MarginContainer/BoxContainer"]
+layout_mode = 2
+text = "About
+"
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer/BoxContainer"]
+layout_mode = 2
+
+[node name="QuitButton" type="Button" parent="PanelContainer/MarginContainer/BoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_ycop7")
+text = "Quit"
+
+[connection signal="pressed" from="PanelContainer/MarginContainer/BoxContainer/Return to Game" to="." method="_on_return_to_game_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/BoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/BoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/BoxContainer/AboutButton" to="." method="_on_about_button_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/BoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

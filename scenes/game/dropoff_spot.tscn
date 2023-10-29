@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://eycvb3tw45dg"]
+
+[ext_resource type="Script" path="res://scenes/game/dropoff_spot.gd" id="1_s4knv"]
+[ext_resource type="Texture2D" uid="uid://clru64b1fj7ip" path="res://assets/glowspot.png" id="2_nafny"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_it3lu"]
+size = Vector2(100, 143)
+
+[node name="DropoffSpot" type="Area2D"]
+script = ExtResource("1_s4knv")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_nafny")
+
+[node name="clickspot" type="CollisionShape2D" parent="."]
+position = Vector2(1, 2)
+shape = SubResource("RectangleShape2D_it3lu")

@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://cboesb5h8kiyo"]
+
+[ext_resource type="Script" path="res://scenes/game/card_stack.gd" id="1_6duud"]
+[ext_resource type="PackedScene" uid="uid://eycvb3tw45dg" path="res://scenes/game/dropoff_spot.tscn" id="2_85xq6"]
+
+[node name="CardStack" type="Node2D"]
+script = ExtResource("1_6duud")
+
+[node name="Internal" type="Node2D" parent="."]
+
+[node name="DropoffSpot" parent="." instance=ExtResource("2_85xq6")]
+
+[connection signal="mouse_entered" from="DropoffSpot" to="." method="_on_dropoff_spot_mouse_entered"]
+[connection signal="mouse_exited" from="DropoffSpot" to="." method="_on_dropoff_spot_mouse_exited"]

@@ -1,0 +1,6 @@
+[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://boavemlawp337"]
+
+[ext_resource type="Texture2D" uid="uid://b7kemllamk1wd" path="res://assetpacks/kenney/ui/blue_button00.png" id="1_bc82l"]
+
+[resource]
+texture = ExtResource("1_bc82l")
