@@ -1,5 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://b8yg4b31j8o3f"]
+[gd_scene load_steps=3 format=3 uid="uid://b8yg4b31j8o3f"]
 
+[ext_resource type="Script" path="res://scenes/ui/settings_window.gd" id="1_4p2nq"]
 [ext_resource type="Theme" uid="uid://b6lbw18suvq5x" path="res://scenes/ui/ui_theme.tres" id="1_vfsbp"]
 
 [node name="SettingsWindow" type="Control"]
@@ -9,6 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_4p2nq")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 1
@@ -49,6 +51,10 @@ text = "Background Music"
 [node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
+[node name="ExitButton" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Return to Main Menu"
+
+[connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/SFXToggle" to="." method="_on_sfx_toggle_toggled"]
+[connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/MusicToggle" to="." method="_on_music_toggle_toggled"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]

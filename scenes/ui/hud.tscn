@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://ddi4q85dn570c"]
+
+[ext_resource type="Script" path="res://scenes/ui/hud.gd" id="1_hhk3m"]
+[ext_resource type="Theme" uid="uid://b6lbw18suvq5x" path="res://scenes/ui/ui_theme.tres" id="2_y1iks"]
+[ext_resource type="Texture2D" uid="uid://btfyp8oc650aa" path="res://assetpacks/kenney/icons/gear.png" id="3_n384j"]
+
+[node name="HUD" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_hhk3m")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme = ExtResource("2_y1iks")
+
+[node name="SettingsButton" type="Button" parent="MarginContainer"]
+layout_mode = 2
+icon = ExtResource("3_n384j")
+
+[connection signal="pressed" from="MarginContainer/SettingsButton" to="." method="_on_settings_button_pressed"]

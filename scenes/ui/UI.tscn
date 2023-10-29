@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://b0820bm2kd3n3"]
+[gd_scene load_steps=7 format=3 uid="uid://b0820bm2kd3n3"]
 
-[ext_resource type="PackedScene" uid="uid://b8yg4b31j8o3f" path="res://scenes/ui/settings_window.tscn" id="1_8jr8u"]
-[ext_resource type="PackedScene" uid="uid://ckdykflyiefy8" path="res://scenes/ui/main_menu.tscn" id="2_hew7y"]
+[ext_resource type="Script" path="res://scenes/ui/ui.gd" id="1_3t87y"]
+[ext_resource type="PackedScene" uid="uid://ddi4q85dn570c" path="res://scenes/ui/hud.tscn" id="2_a36gu"]
+[ext_resource type="Texture2D" uid="uid://cbkmeh3f5xgw0" path="res://assets/fader.png" id="3_jbwg8"]
+[ext_resource type="PackedScene" uid="uid://ckdykflyiefy8" path="res://scenes/ui/main_menu.tscn" id="4_kx7xj"]
+[ext_resource type="PackedScene" uid="uid://b8yg4b31j8o3f" path="res://scenes/ui/settings_window.tscn" id="5_rcxou"]
+[ext_resource type="PackedScene" uid="uid://oc2q71yfb2us" path="res://scenes/ui/info_window.tscn" id="6_hpuq0"]
 
 [node name="UI" type="Control"]
 layout_mode = 3
@@ -10,11 +14,53 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_3t87y")
 
-[node name="SettingsWindow" parent="." instance=ExtResource("1_8jr8u")]
-visible = false
+[node name="HUD" parent="." instance=ExtResource("2_a36gu")]
 layout_mode = 1
 
-[node name="MainMenu" parent="." instance=ExtResource("2_hew7y")]
+[node name="Greyscreen" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(640, 360)
+scale = Vector2(1280, 720)
+texture = ExtResource("3_jbwg8")
+
+[node name="Windows" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MainMenu" parent="Windows" instance=ExtResource("4_kx7xj")]
 visible = false
 layout_mode = 1
+offset_left = 640.0
+offset_top = 360.0
+offset_right = 640.0
+offset_bottom = 360.0
+
+[node name="SettingsWindow" parent="Windows" instance=ExtResource("5_rcxou")]
+visible = false
+layout_mode = 1
+offset_left = 640.0
+offset_top = 360.0
+offset_right = 640.0
+offset_bottom = 360.0
+
+[node name="InfoWindow" parent="Windows" instance=ExtResource("6_hpuq0")]
+visible = false
+layout_mode = 1
+offset_left = 640.0
+offset_top = 360.0
+offset_right = 640.0
+offset_bottom = 360.0
+
+[connection signal="settings_button_clicked" from="HUD" to="." method="_on_hud_settings_button_clicked"]
+[connection signal="about_button_pressed" from="Windows/MainMenu" to="." method="_on_main_menu_about_button_pressed"]
+[connection signal="new_game_button_pressed" from="Windows/MainMenu" to="." method="_on_main_menu_new_game_button_pressed"]
+[connection signal="quit_button_pressed" from="Windows/MainMenu" to="." method="_on_main_menu_quit_button_pressed"]
+[connection signal="return_to_game_pressed" from="Windows/MainMenu" to="." method="_on_main_menu_return_to_game_pressed"]
+[connection signal="settings_button_pressed" from="Windows/MainMenu" to="." method="_on_main_menu_settings_button_pressed"]
+[connection signal="exit_button_clicked" from="Windows/SettingsWindow" to="." method="_on_settings_window_exit_button_clicked"]
+[connection signal="music_toggled" from="Windows/SettingsWindow" to="." method="_on_settings_window_music_toggled"]
+[connection signal="sfx_toggled" from="Windows/SettingsWindow" to="." method="_on_settings_window_sfx_toggled"]
+[connection signal="close_button_clicked" from="Windows/InfoWindow" to="." method="_on_info_window_close_button_clicked"]

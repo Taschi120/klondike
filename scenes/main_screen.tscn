@@ -21,11 +21,11 @@ rotation = 1.5708
 texture = ExtResource("1_85u7u")
 
 [node name="Stock" parent="." node_paths=PackedStringArray("main_scene") instance=ExtResource("3_muh34")]
-position = Vector2(72, 96)
+position = Vector2(208, 95)
 main_scene = NodePath("..")
 
 [node name="Discard" parent="." instance=ExtResource("4_nk5yw")]
-position = Vector2(190, 96)
+position = Vector2(320, 95)
 
 [node name="Foundations" type="Node2D" parent="."]
 position = Vector2(112, 0)
@@ -77,10 +77,7 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 640.0
-offset_top = 360.0
-offset_right = 640.0
-offset_bottom = 360.0
+metadata/_edit_group_ = true
 
 [node name="CheatUI" parent="." instance=ExtResource("9_n1di1")]
 metadata/_edit_group_ = true

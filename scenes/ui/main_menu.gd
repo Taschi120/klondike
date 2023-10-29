@@ -1,6 +1,6 @@
 extends Control
 
-class_name SettingsWindow
+class_name MySettingsWindow
 
 signal quit_button_pressed
 signal about_button_pressed
