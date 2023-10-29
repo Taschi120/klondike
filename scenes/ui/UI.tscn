@@ -1,11 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://b0820bm2kd3n3"]
+[gd_scene load_steps=9 format=3 uid="uid://b0820bm2kd3n3"]
 
 [ext_resource type="Script" path="res://scenes/ui/ui.gd" id="1_3t87y"]
 [ext_resource type="PackedScene" uid="uid://ddi4q85dn570c" path="res://scenes/ui/hud.tscn" id="2_a36gu"]
-[ext_resource type="Texture2D" uid="uid://cbkmeh3f5xgw0" path="res://assets/fader.png" id="3_jbwg8"]
+[ext_resource type="Texture2D" uid="uid://8wvoqgw2j7ev" path="res://assets/fade_to_black.png" id="3_ys4yw"]
+[ext_resource type="Script" path="res://congratulations_dialog.gd" id="4_jhoir"]
 [ext_resource type="PackedScene" uid="uid://ckdykflyiefy8" path="res://scenes/ui/main_menu.tscn" id="4_kx7xj"]
 [ext_resource type="PackedScene" uid="uid://b8yg4b31j8o3f" path="res://scenes/ui/settings_window.tscn" id="5_rcxou"]
 [ext_resource type="PackedScene" uid="uid://oc2q71yfb2us" path="res://scenes/ui/info_window.tscn" id="6_hpuq0"]
+[ext_resource type="PackedScene" uid="uid://hdmgfvn5xequ" path="res://congratulations_dialog.tscn" id="8_gfv8t"]
 
 [node name="UI" type="Control"]
 layout_mode = 3
@@ -20,15 +22,15 @@ script = ExtResource("1_3t87y")
 layout_mode = 1
 
 [node name="Greyscreen" type="Sprite2D" parent="."]
-visible = false
 position = Vector2(640, 360)
 scale = Vector2(1280, 720)
-texture = ExtResource("3_jbwg8")
+texture = ExtResource("3_ys4yw")
 
 [node name="Windows" type="Control" parent="."]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+script = ExtResource("4_jhoir")
 
 [node name="MainMenu" parent="Windows" instance=ExtResource("4_kx7xj")]
 visible = false
@@ -54,6 +56,14 @@ offset_top = 360.0
 offset_right = 640.0
 offset_bottom = 360.0
 
+[node name="CongratulationsDialog" parent="Windows" instance=ExtResource("8_gfv8t")]
+visible = false
+layout_mode = 1
+offset_left = 620.0
+offset_top = 340.0
+offset_right = 620.0
+offset_bottom = 340.0
+
 [connection signal="settings_button_clicked" from="HUD" to="." method="_on_hud_settings_button_clicked"]
 [connection signal="about_button_pressed" from="Windows/MainMenu" to="." method="_on_main_menu_about_button_pressed"]
 [connection signal="new_game_button_pressed" from="Windows/MainMenu" to="." method="_on_main_menu_new_game_button_pressed"]
@@ -64,3 +74,4 @@ offset_bottom = 360.0
 [connection signal="music_toggled" from="Windows/SettingsWindow" to="." method="_on_settings_window_music_toggled"]
 [connection signal="sfx_toggled" from="Windows/SettingsWindow" to="." method="_on_settings_window_sfx_toggled"]
 [connection signal="close_button_clicked" from="Windows/InfoWindow" to="." method="_on_info_window_close_button_clicked"]
+[connection signal="play_again" from="Windows/CongratulationsDialog" to="." method="_on_congratulations_dialog_play_again"]

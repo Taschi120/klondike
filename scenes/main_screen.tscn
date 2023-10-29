@@ -29,6 +29,7 @@ position = Vector2(320, 95)
 
 [node name="Foundations" type="Node2D" parent="."]
 position = Vector2(112, 0)
+metadata/_edit_group_ = true
 
 [node name="FoundationHeart" parent="Foundations" instance=ExtResource("5_w2yvf")]
 position = Vector2(728, 98)
@@ -46,6 +47,7 @@ position = Vector2(1088, 96)
 suit = "club"
 
 [node name="Tableaux" type="Node2D" parent="."]
+metadata/_edit_group_ = true
 
 [node name="TableauPile1" parent="Tableaux" instance=ExtResource("4_pp1ba")]
 position = Vector2(480, 260)
@@ -80,6 +82,7 @@ anchor_bottom = 0.5
 metadata/_edit_group_ = true
 
 [node name="CheatUI" parent="." instance=ExtResource("9_n1di1")]
+visible = false
 metadata/_edit_group_ = true
 
 [node name="Audio" type="Node2D" parent="."]
@@ -89,3 +92,4 @@ stream = ExtResource("9_xtol0")
 bus = &"SFX"
 
 [connection signal="needs_cycling" from="Stock" to="." method="cycle_discard"]
+[connection signal="play_again" from="UI" to="." method="start_game"]

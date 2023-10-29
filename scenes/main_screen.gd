@@ -28,6 +28,14 @@ class_name MainScreen
 ]
 
 func _ready() -> void:
+	start_game()
+		
+func start_game() -> void:
+	for card in get_tree().get_nodes_in_group("cards"):
+		card.queue_free()
+		
+	await get_tree().create_timer(0).timeout
+	
 	$Stock.create_and_shuffle()
 	
 	if $CheatUI:
@@ -208,12 +216,8 @@ func check_victory():
 		if foundation.get_current_value() < 13:
 			return
 	win()
-
 		
 func win() -> void:
 	$Audio/VictoryFanfare.play()
-	for card in get_tree().get_nodes_in_group("cards"):
-		var tween = get_tree().create_tween()
-		tween.tween_property(card, "position", card.position + Vector2(0, 2000), 3)\
-		.set_trans(Tween.TRANS_CUBIC)
-		tween.tween_callback(card.queue_free)
+	$UI.congratulate()
+
