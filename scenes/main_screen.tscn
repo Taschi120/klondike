@@ -86,5 +86,6 @@ metadata/_edit_group_ = true
 
 [node name="VictoryFanfare" type="AudioStreamPlayer2D" parent="Audio"]
 stream = ExtResource("9_xtol0")
+bus = &"SFX"
 
 [connection signal="needs_cycling" from="Stock" to="." method="cycle_discard"]

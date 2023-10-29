@@ -42,11 +42,11 @@ text = "Settings"
 [node name="SFXToggle" type="CheckButton" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("1_vfsbp")
-text = "Sound Effects"
+text = "Mute Sound Effects"
 
 [node name="MusicToggle" type="CheckButton" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "Background Music"
+text = "Mute Background Music"
 
 [node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2

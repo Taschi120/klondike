@@ -26,8 +26,10 @@ shape = SubResource("RectangleShape2D_sespj")
 
 [node name="Shuffle" type="AudioStreamPlayer2D" parent="Audio"]
 stream = ExtResource("3_adjqu")
+bus = &"SFX"
 
 [node name="DealCard" type="AudioStreamPlayer2D" parent="Audio"]
 stream = ExtResource("4_gkery")
+bus = &"SFX"
 
 [connection signal="input_event" from="Empty" to="." method="_on_input_event"]

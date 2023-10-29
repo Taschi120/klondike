@@ -67,10 +67,10 @@ func _on_settings_window_exit_button_clicked() -> void:
 	set_state(State.MAIN_MENU)
 
 func _on_settings_window_music_toggled(_value: bool) -> void:
-	assert(false) # TODO
+	SettingsManager.music_enabled = _value
 
 func _on_settings_window_sfx_toggled(_value: bool) -> void:
-	assert(false) # TODO
+	SettingsManager.sfx_enabled = _value
 	
 
 ###############
