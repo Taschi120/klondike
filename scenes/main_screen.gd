@@ -97,8 +97,10 @@ func notify_selection_change(_source: CardStack) -> void:
 		stack._on_selection_changed($Selection.get_cards(), _source)
 		
 func _on_double_click(_card) -> void:
-	print(_card.debug_string())
-	
+	print("DC " + _card.debug_string())
+	if not $Selection.is_empty():
+		return
+		
 	match _card.get_region():
 		Regions.DISCARD, Regions.TABLEAU, Regions.CURSOR:
 			if try_move_to_foundation(_card):
