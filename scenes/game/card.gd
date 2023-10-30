@@ -106,7 +106,7 @@ func debug_string() -> String:
 		+ " @ " + get_region_name() + ")"
 	return result
 
-func clickable():
+func clickable() -> bool:
 	match get_region():
 		Regions.DRAW:
 			return at_top

@@ -27,6 +27,12 @@ class_name MainScreen
 	$Discard
 ]
 
+# Stores the most recent frame on which a card was taken from the stock.
+# This is necessary to prevent accidentally picking up multiple cards
+# at once, as taking the top card will immediately trigger a click event
+# on the next one
+var last_draw_frame = 0
+
 func _ready() -> void:
 	start_game()
 		
@@ -69,6 +75,11 @@ func _on_card_clicked(_card) -> void:
 		Regions.DRAW:
 			if not $Selection.is_empty():
 				return
+				
+			var current_frame = Engine.get_process_frames()
+			if current_frame == last_draw_frame:
+				return
+			last_draw_frame = current_frame
 			var card = $Stock.take_top_card()
 			assert(card == _card)
 			print("Moving " + card.debug_string() + " from Stock to Discard")
@@ -211,6 +222,7 @@ func find_tableau(_card):
 	return null
 
 func cycle_discard():
+	$Stock/Audio/Shuffle.play()
 	while not $Discard.is_empty():
 		var card = $Discard.take_top_card()
 		card.set_deferred("open", false)
