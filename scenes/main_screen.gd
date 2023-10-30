@@ -207,12 +207,12 @@ func try_move_to_tableau(_card) -> bool:
 	
 	return false
 	
-func remove_card_from_tableaux(_card):
+func remove_card_from_tableaux(_card) -> void:
 	for tableau in tableaux:
 		if not tableau.is_empty() and _card == tableau.peek():
 			tableau.take_top_card()
 
-func find_tableau(_card):
+func find_tableau(_card) -> TableauPile:
 	assert(_card.get_region() == Regions.TABLEAU)
 	for tableau in tableaux:
 		if tableau.contains(_card):
@@ -221,7 +221,7 @@ func find_tableau(_card):
 	assert(false)
 	return null
 
-func cycle_discard():
+func cycle_discard() -> void:
 	$Stock/Audio/Shuffle.play()
 	while not $Discard.is_empty():
 		var card = $Discard.take_top_card()
@@ -232,7 +232,7 @@ func cycle_discard():
 		if not $Stock.is_empty():
 			$Stock.peek().set_deferred("at_top", true)
 			
-func check_victory():
+func check_victory() -> void:
 	for foundation in $Foundations.get_children():
 		if foundation.get_current_value() < 13:
 			return
