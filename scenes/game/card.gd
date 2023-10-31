@@ -33,16 +33,18 @@ func set_open(_open: bool) -> void:
 		$CardbackSprite.visible = true
 		$MainSprite.visible = false
 		
-func set_suit(_suit):
+func set_suit(_suit) -> void:
 	suit = _suit
-	$MainSprite.frame_coords.y = get_row(suit)
+	update_sprite()
 
-func set_value(_value):
+func set_value(_value) -> void:
 	assert(_value >= 1)
 	assert(_value <= 13)
 	value = _value
-	$MainSprite.frame_coords.x = value - 1
-
+	update_sprite()
+	
+func update_sprite() -> void:
+	$MainSprite.texture = CardSpriteCacheInstance.sprites[suit][value - 1]
 		
 func get_row(_suit: String) -> int:
 	if _suit == DIAMOND:
