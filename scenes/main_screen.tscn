@@ -36,15 +36,12 @@ position = Vector2(728, 98)
 
 [node name="FoundationDiamond" parent="Foundations" instance=ExtResource("5_w2yvf")]
 position = Vector2(848, 96)
-suit = "diamond"
 
 [node name="FoundationSpade" parent="Foundations" instance=ExtResource("5_w2yvf")]
 position = Vector2(968, 96)
-suit = "spade"
 
 [node name="FoundationClub" parent="Foundations" instance=ExtResource("5_w2yvf")]
 position = Vector2(1088, 96)
-suit = "club"
 
 [node name="Tableaux" type="Node2D" parent="."]
 metadata/_edit_group_ = true

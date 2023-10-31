@@ -16,6 +16,10 @@ func get_cards() -> Array:
 	
 func add_card(_card):
 	$Internal.add_child(_card)
+	reposition_card(_card)
+	
+func reposition_card(_card) -> void:
+	var tween = self.create_tween()
 	_card.position = Vector2.ZERO
 	
 func add_cards(stack: Array) -> void:

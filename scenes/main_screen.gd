@@ -147,7 +147,7 @@ func try_move_to_foundation(_card) -> bool:
 	if not _card.open:
 		return false
 	for foundation in $Foundations.get_children():
-		if foundation.suit == _card.suit:
+		if foundation.suit == _card.suit or foundation.suit == "undefined":
 			if foundation.get_current_value() + 1 == _card.value:
 				if _card.get_region() == Regions.DISCARD:
 					print("Move from discard to foundation")

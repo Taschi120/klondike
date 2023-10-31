@@ -13,6 +13,9 @@ func remove_card(_card):
 	super.remove_card(_card)
 	reorg_stack()
 	
+func reposition_card(_card) -> void:
+	pass # we'll take care of any repositioning in "reorg_stack()"
+	
 func take_top_card():
 	var result = super.take_top_card()
 	reorg_stack()
@@ -53,10 +56,12 @@ func reorg_stack():
 			offset += FACEDOWN_OFFSET
 			
 		card = $Internal.get_child(i)
-		card.position = offset
+		var tween = card.create_tween()
+		tween.tween_property(card, "position", offset, 0.1)
 		previous_card_open = card.open
-		
-	$DropoffSpot.position = $Internal.get_child(child_count - 1).position
+	
+	var tween = $DropoffSpot.create_tween()
+	tween.tween_property($DropoffSpot, "position", offset, 0.1)
 		
 func get_region():
 	return Regions.TABLEAU
