@@ -8,7 +8,13 @@ signal needs_cycling
 
 var card_scene = load("res://scenes/game/card.tscn")
 
+# number of the most recent frame when a card was picked up.
+# we need this info so one click cannot trigger both pickup
+# of the last card in the stack and cycling the discard
+var last_draw_frame = 0
+
 func take_top_card() -> Card:
+	last_draw_frame = Engine.get_process_frames()
 	$Audio/DealCard.play()
 	return super.take_top_card()
 	
@@ -46,6 +52,7 @@ func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	and event.pressed \
 	and event.button_index == MOUSE_BUTTON_LEFT \
 	and get_tree().root.get_node("MainScreen").get_node("Selection").is_empty() \
-	and is_empty():
+	and is_empty() \
+	and Engine.get_process_frames() > last_draw_frame:
 		print("Stack empty")
 		needs_cycling.emit()

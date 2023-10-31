@@ -35,11 +35,7 @@ var last_draw_frame = 0
 
 func _ready() -> void:
 	start_game()
-		
 
-func _process(delta: float) -> void:
-	var num_cards = get_tree().get_nodes_in_group("cards").size()
-	assert(num_cards == 52 || num_cards == 0)
 
 func start_game() -> void:
 	for card in get_tree().get_nodes_in_group("cards"):
@@ -51,6 +47,7 @@ func start_game() -> void:
 	
 	if $CheatUI:
 		$CheatUI.win.connect(self.win)
+		
 	
 	for foundation in $Foundations.get_children():
 		foundation.card_added.connect(self.check_victory)
