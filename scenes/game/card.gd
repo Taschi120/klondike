@@ -158,6 +158,7 @@ func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 		
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.is_pressed():
-			picked_up.emit(self)
+			var cursor_offset = event.position - self.global_position
+			picked_up.emit(self, cursor_offset)
 		elif event.is_released():
 			released.emit(self)

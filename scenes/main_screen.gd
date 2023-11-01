@@ -65,7 +65,7 @@ func start_game() -> void:
 		card.at_top = true
 		stack.add_card(card)
 
-func _on_card_clicked(_card) -> void:
+func _on_card_clicked(_card, cursor_offset) -> void:
 	print(_card.debug_string())
 	
 	match _card.get_region():
@@ -90,6 +90,7 @@ func _on_card_clicked(_card) -> void:
 			if not $Selection.is_empty():
 				$Selection.put_back()
 			$Selection.add_card_from(_card, $Discard)
+			$Selection.cursor_offset = cursor_offset
 			notify_selection_change($Discard)
 			
 		Regions.TABLEAU:
@@ -102,6 +103,7 @@ func _on_card_clicked(_card) -> void:
 				var _cards = _tableau.take_top_cards(_card)
 				assert(_cards.size() >= 1)
 				$Selection.add_cards_from(_cards, _tableau)
+				$Selection.cursor_offset = cursor_offset
 				notify_selection_change(_tableau)
 			elif _card.at_top:
 				_card.open = true

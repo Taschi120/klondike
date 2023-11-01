@@ -6,6 +6,8 @@ const OFFSET = Vector2(0, 35)
 
 var source: CardStack = null
 
+var cursor_offset = Vector2.ZERO : set = set_cursor_offset
+
 func add_card(card):
 	assert(source != null) # whoever calls this MUST ensure source is set first - otherwise, application state
 	# will go to shit! Ideally, call add_card_from(...) instead
@@ -67,11 +69,12 @@ func reorg_stack():
 	if is_empty():
 		return
 	
-	var offset = Vector2(0, 0)
+	var offset = -cursor_offset
 	
 	var card = $Internal.get_child(0) as Card
-	var tween = card.create_tween_and_kill_previous()
-	tween.tween_property(card, "position", offset, 0.1)
+	var _tween = card.create_tween_and_kill_previous()
+	card.position = offset # No animation here because this should already be the card's position
+
 	var previous_card_open = card.open
 
 	for i in range(1, child_count):
@@ -80,3 +83,8 @@ func reorg_stack():
 		card = $Internal.get_child(i)
 		card.position = offset
 		previous_card_open = card.open
+
+func set_cursor_offset(value: Vector2) -> void:
+	cursor_offset = value
+	reorg_stack()
+	
