@@ -14,6 +14,9 @@ func add_card(card):
 	card.at_top = false
 	reorg_stack()
 	
+func reposition_card(_card) -> void:
+	pass # handled in reorg_stack()
+	
 func add_card_from(card: Card, _source: CardStack) -> void:
 	assert(is_empty())
 	assert(_source != null)
@@ -66,12 +69,12 @@ func reorg_stack():
 	
 	var offset = Vector2(0, 0)
 	
-	var card = $Internal.get_child(0)
-
-	card.position = offset
+	var card = $Internal.get_child(0) as Card
+	var tween = card.create_tween_and_kill_previous()
+	tween.tween_property(card, "position", offset, 0.1)
 	var previous_card_open = card.open
 
-	for i in range(0, child_count):
+	for i in range(1, child_count):
 		offset += OFFSET
 			
 		card = $Internal.get_child(i)

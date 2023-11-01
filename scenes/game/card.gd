@@ -19,6 +19,13 @@ const CLUB = "club"
 var suit = SPADE: set = set_suit
 var value = 1: set = set_value
 
+var tween: Tween = null
+
+func create_tween_and_kill_previous() -> Tween:
+	if tween:
+		tween.kill()
+	return create_tween()
+
 func get_region() -> int:
 	if get_parent() == null or get_parent().get_parent() == null:
 		return -1

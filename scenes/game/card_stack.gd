@@ -6,6 +6,8 @@ class_name CardStack
 
 var hovered = false
 
+var tween: Tween = null
+
 func _ready() -> void:
 	if $DropoffSpot:
 		$DropoffSpot.mouse_entered.connect(func(): hovered = true)
@@ -18,9 +20,9 @@ func add_card(_card):
 	$Internal.add_child(_card)
 	reposition_card(_card)
 	
-func reposition_card(_card) -> void:
-	var tween = self.create_tween()
-	_card.position = Vector2.ZERO
+func reposition_card(_card: Card) -> void:
+	tween = _card.create_tween_and_kill_previous()
+	tween.tween_property(_card, "position", Vector2.ZERO, 0.1)
 	
 func add_cards(stack: Array) -> void:
 	for card in stack:

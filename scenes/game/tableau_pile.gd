@@ -56,7 +56,7 @@ func reorg_stack():
 			offset += FACEDOWN_OFFSET
 			
 		card = $Internal.get_child(i)
-		var tween = card.create_tween()
+		var tween = card.create_tween_and_kill_previous()
 		tween.tween_property(card, "position", offset, 0.1)
 		previous_card_open = card.open
 	
