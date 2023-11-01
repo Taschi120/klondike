@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bpeebsj72rum3" path="res://scenes/game/selection.tscn" id="7_j4tme"]
 [ext_resource type="PackedScene" uid="uid://b0820bm2kd3n3" path="res://scenes/ui/ui.tscn" id="8_v3q0t"]
 [ext_resource type="PackedScene" uid="uid://diw0imd6aphmu" path="res://scenes/ui/cheat_ui.tscn" id="9_n1di1"]
-[ext_resource type="AudioStream" uid="uid://c8wpouym8sbqx" path="res://assetpacks/kenney/jingles-saxophone_15.ogg" id="9_xtol0"]
+[ext_resource type="AudioStream" uid="uid://bm57704nkk6nm" path="res://assets/victory.ogg" id="10_twa88"]
 
 [node name="MainScreen" type="Node2D"]
 script = ExtResource("1_ckoej")
@@ -85,7 +85,7 @@ metadata/_edit_group_ = true
 [node name="Audio" type="Node2D" parent="."]
 
 [node name="VictoryFanfare" type="AudioStreamPlayer2D" parent="Audio"]
-stream = ExtResource("9_xtol0")
+stream = ExtResource("10_twa88")
 bus = &"SFX"
 
 [connection signal="needs_cycling" from="Stock" to="." method="cycle_discard"]
