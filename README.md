@@ -29,7 +29,7 @@ loosely connect those data classes to the actual game nodes.
 
 * Architecture - if I were to redo this entire project, I'd try to use the Command pattern, as
 described in "Game Programming Patterns" by Robert Nystrom. This game does not currently have
-an "Undo" pattern, and frankly whith how much of a mess the game logic has already become, I don't
+an "Undo" feature, and frankly whith how much of a mess the game logic has already become, I don't
 really feel like dealing with that.
 
 * Choice of game - one final bit of wisdom: If you want to program a solitaire game, try picking
